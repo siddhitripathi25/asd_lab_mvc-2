@@ -15,74 +15,74 @@ const pathToFile = path.join(__dirname, "users.json");
 const pathToFile2 = path.join(__dirname, "books.json");
 
 // get all users or filtered
-app.get("/users", (req, res) => {
-  fs.readFile(pathToFile, "utf-8", (err, data) => {
-    if (err) {
-      return res.status(500).json({
-        message: "Internal Server Error",
-      });
-    }
-    // handles both /users and /users?minAge=20
-    const users = JSON.parse(data);
-    if (req.query.minAge) {
-      const minAge = Number(req.query.minAge);
-      const filteredUsers = users.filter((user) => user.age >= minAge);
-      return res.status(200).json(filteredUsers);
-    }
-    res.status(200).json(users);
-  });
-});
+// app.get("/users", (req, res) => {
+//   fs.readFile(pathToFile, "utf-8", (err, data) => {
+//     if (err) {
+//       return res.status(500).json({
+//         message: "Internal Server Error",
+//       });
+//     }
+//     // handles both /users and /users?minAge=20
+//     const users = JSON.parse(data);
+//     if (req.query.minAge) {
+//       const minAge = Number(req.query.minAge);
+//       const filteredUsers = users.filter((user) => user.age >= minAge);
+//       return res.status(200).json(filteredUsers);
+//     }
+//     res.status(200).json(users);
+//   });
+// });
 
 app.listen(3002);
 // get 1 user
-app.get("/users/:id", (req, res) => {
-  fs.readFile(pathToFile, "utf-8", (err, data) => {
-    if (err) {
-      return res.status(500).json({
-        message: "Internal Server Error",
-      });
-    }
-    const users = JSON.parse(data);
-    const id = Number(req.params.id);
-    const user = users.find((user) => user.id === id);
-    if (!user) {
-      return res.status(404).json({
-        message: "User not found",
-      });
-    }
-    res.status(200).json(user);
-  });
-});
+// app.get("/users/:id", (req, res) => {
+//   fs.readFile(pathToFile, "utf-8", (err, data) => {
+//     if (err) {
+//       return res.status(500).json({
+//         message: "Internal Server Error",
+//       });
+//     }
+//     const users = JSON.parse(data);
+//     const id = Number(req.params.id);
+//     const user = users.find((user) => user.id === id);
+//     if (!user) {
+//       return res.status(404).json({
+//         message: "User not found",
+//       });
+//     }
+//     res.status(200).json(user);
+//   });
+// });
 
 // add a user
-app.post("/users", (req, res) => {
-  fs.readFile(pathToFile, "utf-8", (err, data) => {
-    if (err) {
-      return res.status(500).json({
-        message: "Internal Server Error",
-      });
-    }
-    const users = JSON.parse(data);
-    const newUser = {
-      id: users.length + 1,
-      name: req.body.name,
-      email: req.body.email,
-      age: req.body.age,
-      city: req.body.city,
-    };
-    users.push(newUser);
+// app.post("/users", (req, res) => {
+//   fs.readFile(pathToFile, "utf-8", (err, data) => {
+//     if (err) {
+//       return res.status(500).json({
+//         message: "Internal Server Error",
+//       });
+//     }
+//     const users = JSON.parse(data);
+//     const newUser = {
+//       id: users.length + 1,
+//       name: req.body.name,
+//       email: req.body.email,
+//       age: req.body.age,
+//       city: req.body.city,
+//     };
+//     users.push(newUser);
 
-    fs.writeFile(pathToFile, JSON.stringify(users, null, 2), (err) => {
-      if (err) {
-        return res.status(500).json({
-          message: "Internal Server Error",
-        });
-      }
+//     fs.writeFile(pathToFile, JSON.stringify(users, null, 2), (err) => {
+//       if (err) {
+//         return res.status(500).json({
+//           message: "Internal Server Error",
+//         });
+//       }
 
-      res.status(201).json(newUser);
-    });
-  });
-});
+//       res.status(201).json(newUser);
+//     });
+//   });
+// });
 
 // update a user
 app.patch("/users/:id", (req, res) => {
