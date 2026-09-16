@@ -1,6 +1,6 @@
 const express = require("express");
-const fs = require("fs");
-const path = require("path");
+// const fs = require("fs");
+// const path = require("path");
 
 const app = express();
 
@@ -11,7 +11,7 @@ const app = express();
 // };
 
 app.use(express.json());
-const pathToFile = path.join(__dirname, "users.json");
+// const pathToFile = path.join(__dirname, "users.json");
 const pathToFile2 = path.join(__dirname, "books.json");
 
 // get all users or filtered
